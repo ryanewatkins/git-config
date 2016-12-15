@@ -1,16 +1,3 @@
-[credential]
-	helper = osxkeychain
-[push]
-	default = simple
-[remote "origin"]
-	push = HEAD
-[user]
-	email = ryan.watkins@infusionsoft.com
-	name = Ryan Watkins
-[core]
-	editor = mate -w
-	excludesfile = /Users/devs/.gitignore_global
-	autocrlf = input
 [alias]
 	hist = log --all --graph --decorate --oneline
 	co = checkout
@@ -30,14 +17,14 @@
 	vv = branch -vv
 	cleanse = !git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -n 1 git branch -D
 	
+	# Update all behind branches
+	ub = "!CURRENT_BRANCH=`git current-branch`; git pull; for branch in `git branch -vv | egrep ': behind \\d*]' | awk '{print $1}'`; do git checkout $branch; git merge --ff-only origin/$branch; done; git checkout $CURRENT_BRANCH"
+	
 	# Other useful aliases:
 	unstage = reset HEAD
 	staged = diff --cached
 	unstaged = diff
 	current-branch = !git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||'
-	# Usage: git track origin/feature-123-login-form
-	track = checkout -t
-	ctags = !.git/hooks/ctags
 [apply]
 	whitespace = warn
 [clean]
@@ -51,6 +38,12 @@
 	added = green
 	changed = yellow
 	untracked = red
+[core]
+	editor = mate -w
+	excludesfile = /Users/devs/.gitignore_global
+	autocrlf = input
+[credential]
+	helper = osxkeychain
 [diff]
 	tool = bcomp
 [difftool]
@@ -58,13 +51,6 @@
 [difftool "bcomp"]
 	trustExitCode = true
 	cmd = "/usr/local/bin/bcomp" "$LOCAL" "$REMOTE"
-[merge]
-	tool = bcomp
-[mergetool]
-	prompt = false
-[mergetool "bcomp"]
-	trustExitCode = true
-	cmd = "/usr/local/bin/bcomp" "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
 [fetch]
 	prune = true
 [help]
@@ -73,11 +59,21 @@
 	templatedir = ~/.git_template
 [log]
 	decorate = short
+[merge]
+	tool = bcomp
+[mergetool]
+	prompt = false
+[mergetool "bcomp"]
+	trustExitCode = true
+	cmd = "/usr/local/bin/bcomp" "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
+[pull]
+	ff = only
 [push]
 	default = simple
 [remote "origin"]
 	push = HEAD
 [status]
 	submodule = 1
-[pull]
-	ff = only
+[user]
+	email = ryan.watkins@infusionsoft.com
+	name = Ryan Watkins
