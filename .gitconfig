@@ -1,12 +1,35 @@
+[credential]
+	helper = osxkeychain
+[push]
+	default = simple
+[remote "origin"]
+	push = HEAD
+[user]
+	email = ryan.watkins@infusionsoft.com
+	name = Ryan Watkins
+[core]
+	editor = mate -w
+	excludesfile = /Users/devs/.gitignore_global
+	autocrlf = input
 [alias]
+	hist = log --all --graph --decorate --oneline
 	co = checkout
 	d = diff
 	ds = diff --stat
+	
 	# Logging aliases:
 	l = log --graph --date=format:%c --pretty=format:'%C(auto)%h%d %s  %C(green)%an, %ar %C(cyan)(%ad) %C(auto)'
 	la = log --graph --date=format:%c --pretty=format:'%C(auto)%h%d %s  %C(green)%an, %ar %C(cyan)(%ad) %C(auto)' --all
 	ls = log --graph --date=format:%c --pretty=format:'%C(auto)%h%d %s  %C(green)%an, %ar %C(cyan)(%ad) %C(auto)' --simplify-by-decoration
 	las = log --graph --date=format:%c --pretty=format:'%C(auto)%h%d %s  %C(green)%an, %ar %C(cyan)(%ad) %C(auto)' --all --simplify-by-decoration
+	
+	# Version aliases:
+	vrm = describe origin/develop origin/release origin/master
+	
+	# Branch aliases:
+	vv = branch -vv
+	cleanse = !git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -n 1 git branch -D
+	
 	# Other useful aliases:
 	unstage = reset HEAD
 	staged = diff --cached
@@ -28,12 +51,20 @@
 	added = green
 	changed = yellow
 	untracked = red
-[core]
-	excludesfile = /Users/devs/.gitignore_global
-	autocrlf = input
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+[diff]
+	tool = bcomp
+[difftool]
+	prompt = false
+[difftool "bcomp"]
+	trustExitCode = true
+	cmd = "/usr/local/bin/bcomp" "$LOCAL" "$REMOTE"
+[merge]
+	tool = bcomp
+[mergetool]
+	prompt = false
+[mergetool "bcomp"]
+	trustExitCode = true
+	cmd = "/usr/local/bin/bcomp" "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
 [fetch]
 	prune = true
 [help]
@@ -42,17 +73,11 @@
 	templatedir = ~/.git_template
 [log]
 	decorate = short
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
 [push]
 	default = simple
 [remote "origin"]
 	push = HEAD
 [status]
 	submodule = 1
-[user]
-	name = Jake Griffin
-	email = jake.griffin@infusionsoft.com
 [pull]
 	ff = only
