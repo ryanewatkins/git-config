@@ -15,10 +15,20 @@
 	
 	# Branch aliases:
 	vv = branch -vv
-	cleanse = !git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -n 1 git branch -D
+	cleanup = !git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -n 1 git branch -D
 	
 	# Update all behind branches
-	ub = "!CURRENT_BRANCH=`git current-branch`; git pull; for branch in `git branch -vv | egrep ': behind \\d*]' | awk '{print $1}'`; do git checkout $branch; git merge --ff-only origin/$branch; done; git checkout $CURRENT_BRANCH"
+	updatebranches = "! \
+           CURRENT_BRANCH=`git current-branch`; \
+           echo \"Current branch is $CURRENT_BRANCH\"; \
+           git co -b dummy_branch; \
+           for branch in `git branch -vv | egrep ': behind \\d*\\]' | awk '{print $1}'`; \
+           do \
+              git checkout $branch; \
+              git merge --ff-only origin/$branch; \
+           done; \
+           git checkout $CURRENT_BRANCH; \
+           git branch -d dummy_branch;"
 	
 	# Other useful aliases:
 	unstage = reset HEAD
