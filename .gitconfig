@@ -18,7 +18,7 @@
 	cleanup = !git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -n 1 git branch -D
 	
 	# Update all behind branches
-	updatebranches = "! \
+	update = "! \
            CURRENT_BRANCH=`git current-branch`; \
            echo \"Current branch is $CURRENT_BRANCH\"; \
            git co -b dummy_branch; \
