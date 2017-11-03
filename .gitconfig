@@ -11,7 +11,11 @@
 	las = log --graph --date=format:%c --pretty=format:'%C(auto)%h%d %s  %C(green)%an, %ar %C(cyan)(%ad) %C(auto)' --all --simplify-by-decoration
 	
 	# Version aliases:
-	vrm = describe origin/develop origin/release origin/master
+	vrm = "! \
+	      git fetch; \
+	      echo \" \"; \
+	      echo \" \"; \
+	      git describe --abbrev=0 origin/master;"
 	
 	# Branch aliases:
 	vv = branch -vv
@@ -50,7 +54,7 @@
 	untracked = red
 [core]
 	editor = mate -w
-	excludesfile = /Users/devs/.gitignore_global
+	excludesfile = /Users/ryan.watkins/.gitignore_global
 	autocrlf = input
 [credential]
 	helper = osxkeychain
