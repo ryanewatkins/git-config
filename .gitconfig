@@ -13,13 +13,11 @@
 	# Version aliases:
 	vrm = "! \
 	      git fetch; \
-	      echo \" \"; \
-	      echo \" \"; \
 	      git describe --abbrev=0 origin/master;"
 	
 	# Branch aliases:
 	vv = branch -vv
-	cleanup = !git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -n 1 git branch -D
+	cleanup = !git co master | git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -n 1 git branch -D
 	
 	# Update all behind branches
 	update = "! \
@@ -56,6 +54,7 @@
 	editor = mate -w
 	excludesfile = /Users/ryan.watkins/.gitignore_global
 	autocrlf = input
+	excludesfiles = /Users/ryan.watkins/.gitignore_global
 [credential]
 	helper = osxkeychain
 [diff]
@@ -89,5 +88,13 @@
 [status]
 	submodule = 1
 [user]
-	email = ryan.watkins@infusionsoft.com
+	email = ryan.watkins@keap.com
 	name = Ryan Watkins
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
