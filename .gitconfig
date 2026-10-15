@@ -68,8 +68,6 @@
 	prune = true
 [help]
 	autocorrect = -1
-[init]
-	templatedir = ~/.git_template
 [log]
 	decorate = short
 [merge]

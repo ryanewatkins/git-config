@@ -1,7 +1,7 @@
 # git-config
 My personal git configuration
 
-To use, create symlinks for `.gitconfig`, `.gitignore_global` and `.git_template` in your home directory:
+To use, create symlinks for `.gitconfig` and `.gitignore_global` in your home directory:
 
     # Assuming path to git-config is `~/Git/git-config`
     ln -s Git/git-config/.gitconfig ~/.gitconfig
