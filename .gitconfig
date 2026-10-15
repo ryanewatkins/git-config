@@ -86,7 +86,7 @@
 [status]
 	submodule = 1
 [user]
-	email = ryan.watkins@keap.com
+	email = ryan.watkins@thryv.com
 	name = Ryan Watkins
 [filter "media"]
 	clean = git-media-clean %f

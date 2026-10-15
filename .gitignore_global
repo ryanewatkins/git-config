@@ -5,3 +5,8 @@ doc/tags
 *.iml
 build
 generated-src
+db-backup.sql
+*/package-lock.json
+.junie/
+
+**/.claude/settings.local.json
