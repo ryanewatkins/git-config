@@ -6,7 +6,6 @@ To use, create symlinks for `.gitconfig` and `.gitignore_global` in your home di
     # Assuming path to git-config is `~/Git/git-config`
     ln -s Git/git-config/.gitconfig ~/.gitconfig
     ln -s Git/git-config/.gitignore_global ~/.gitignore_global
-    ln -s Git/git-config/.git_template ~/.git_template
 
 There is also a script for setting the command line prompt:
 
