@@ -26,7 +26,14 @@
 		done; \
 		git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -r -n 1 git branch -D; \
 	}; f"
-	worktree-cleanup = "!f() { git worktree list --porcelain | awk '/^worktree / { path = substr($0, 10) } /^detached$/ { print path }' | while IFS= read -r path; do echo \"Removing detached worktree: $path\"; git worktree remove \"$path\"; done; }; f"
+	worktree-cleanup = "!f() { \
+		git worktree list --porcelain | \
+		awk '/^worktree / { path = substr($0, 10) } /^detached$/ { print path }' | \
+		while IFS= read -r path; do \
+			echo \"Removing detached worktree: $path\"; \
+			git worktree remove \"$path\"; \
+		done; \
+	}; f"
 	
 	# Update all behind branches
 	update = "! \
