@@ -3,20 +3,16 @@
 	co = checkout
 	d = diff
 	ds = diff --stat
-	
+
 	# Logging aliases:
 	l = log --graph --date=format:%c --pretty=format:'%C(auto)%h%d %s  %C(green)%an, %ar %C(cyan)(%ad) %C(auto)'
 	la = log --graph --date=format:%c --pretty=format:'%C(auto)%h%d %s  %C(green)%an, %ar %C(cyan)(%ad) %C(auto)' --all
 	ls = log --graph --date=format:%c --pretty=format:'%C(auto)%h%d %s  %C(green)%an, %ar %C(cyan)(%ad) %C(auto)' --simplify-by-decoration
 	las = log --graph --date=format:%c --pretty=format:'%C(auto)%h%d %s  %C(green)%an, %ar %C(cyan)(%ad) %C(auto)' --all --simplify-by-decoration
-	
-	# Version aliases:
-	vrm = "! \
-	      git fetch; \
-	      git describe --abbrev=0 origin/master;"
-	
+
 	# Branch aliases:
 	vv = branch -vv
+
 	cleanup = "!f() { \
 		for branch in master main develop dev; do \
 			if git show-ref --verify --quiet \"refs/heads/$branch\"; then \
@@ -26,6 +22,7 @@
 		done; \
 		git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -r -n 1 git branch -D; \
 	}; f"
+
 	worktree-cleanup = "!f() { \
 		git worktree list --porcelain | \
 		awk '/^worktree / { path = substr($0, 10) } /^detached$/ { print path }' | \
@@ -34,7 +31,7 @@
 			git worktree remove \"$path\"; \
 		done; \
 	}; f"
-	
+
 	# Update all behind branches
 	update = "! \
            CURRENT_BRANCH=`git current-branch`; \
@@ -47,7 +44,7 @@
            done; \
            git checkout $CURRENT_BRANCH; \
            git branch -d dummy_branch 2> /dev/null;"
-	
+
 	# Other useful aliases:
 	unstage = reset HEAD
 	staged = diff --cached
